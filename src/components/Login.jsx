@@ -3,23 +3,45 @@ import Header from "./Header";
 import { useState } from "react";
 import { checkValidData } from "../utils/Validate";
 
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/Firebase";
+
 const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const [isSignInForm, setIsSignInForm] = useState(true);
-  const [errorMessage, setErrorMessage] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
   };
 
   const handleButtonCLick = () => {
-    //Handle Form data
-
-    console.log(email.current.value);
-    console.log(password.current.value);
+    
     const message = checkValidData(email.current.value, password.current.value);
     setErrorMessage(message);
+    if (message) return
+    
+   console.log("data", !isSignInForm, message, auth, email, email.current, email.current.value, password, password.current, password.current.value);
+      //CreatNewUser
+    if (!isSignInForm) {
+        //SignUp Logic
+
+        createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            console.log(user)
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setErrorMessage(error.code + "-" + error.message);
+          });
+      } else {
+        //SignIn Logic
+      }
+    
+    //SIgnIN/UP
   };
 
   return (
@@ -46,7 +68,7 @@ const Login = () => {
           <input
             type="text"
             placeholder="Name"
-            className="p-4 my-4 w-full bg-gray-800 rounded-sm"
+            className="p-4 my-4 w-full bg-gray-800 rounded-sm  text-white"
           />
         )}
         <input

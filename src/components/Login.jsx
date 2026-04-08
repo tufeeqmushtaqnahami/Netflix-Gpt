@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import Header from "./Header";
 import { useState } from "react";
 import { checkValidData } from "../utils/Validate";
+import { useNavigate } from "react-router-dom";
 
 import {
   createUserWithEmailAndPassword,
@@ -14,6 +15,7 @@ const Login = () => {
   const password = useRef(null);
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
@@ -35,6 +37,7 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
+          navigate("/browse")
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -47,6 +50,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
+          navigate("/browse")
           // ...
         
         })

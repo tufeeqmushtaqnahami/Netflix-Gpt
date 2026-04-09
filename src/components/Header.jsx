@@ -9,10 +9,10 @@ const Header = () => {
   const user = useSelector(store => store.user)
 
  const  handleSignOut=()=>{
-    signOut(auth).then(() => {
-  navigate("/")
+   signOut(auth).then(() => {
+   navigate("/")
 }).catch((error) => {
-  navigate("/error")
+   navigate("/error")
 });
 
   }

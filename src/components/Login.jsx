@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import Header from "./Header";
 import { useState } from "react";
 import { checkValidData } from "../utils/Validate";
-import { useNavigate } from "react-router-dom";
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -18,7 +18,7 @@ const Login = () => {
   const password = useRef(null);
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
+ 
   const dispatch = useDispatch()
 
   const toggleSignInForm = () => {
@@ -53,7 +53,6 @@ const Login = () => {
                 photoURL: photoURL,
               }),
             );
-            navigate("/browse")
           }).catch((error) => {
             setErrorMessage(error.message)
           });
@@ -69,7 +68,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          navigate("/browse")
+      
           // ...
 
         })

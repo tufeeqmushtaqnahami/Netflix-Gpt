@@ -3,3 +3,19 @@ export const LOGO = "https://help.nflxext.com/helpcenter/OneTrust/oneTrust_produ
 
 
 export const USER_AVATAR = "https://occ-0-2484-3646.1.nflxso.net/dnm/api/v6/SO2HoVCx33X8phZh2pZZmQ4QgNY/AAAABS8sWFjSyj1zyfgcnGamqyJ1E2ZubZGo8dndCM_ipf_5UpmVlkuf8IXzQlmPZQqTMWNjWukESRdLkFGHnf7zbY3MJCO3r4s.png?r=229"
+
+
+
+
+
+
+export const API_OPTIONS  = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ODcyNTJiYTg3Y2UzYmZlY2M2YTNiNWY4NmNkZWM2NSIsIm5iZiI6MTc3NjA5OTAxOS43MTUwMDAyLCJzdWIiOiI2OWRkMWVjYjE3MjNlMTc1NzgzNThiZDgiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.KTk8JnlvLMEAecpKlp98jMAUA6Q7OvUnpD7pUEOpAYg'
+  }
+};
+
+
+

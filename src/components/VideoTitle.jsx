@@ -1,8 +1,21 @@
 import React from 'react'
 
-const VideoTitle = () => {
+const VideoTitle = ({title , overview}) => {
   return (
-    <div>VideoTitle</div>
+    <div className='pt-36 px-20'>
+      <h1 className='text-6xl font-bold'>{title}</h1>
+      <p className='py-6 text-lg w-1/3'>{overview}</p>
+
+
+
+      <div className=''>
+        <button className='bg-gray-600  px-12 text-xl text-white p-4  bg-opacity-50 rounded-lg'>▶️ PLay</button>
+        <button className='bg-gray-800   px-12 text-xl text-white p-4  bg-opacity-50 rounded-lg mx-5'>More Info</button>
+      </div>
+
+
+
+    </div>
   )
 }
 

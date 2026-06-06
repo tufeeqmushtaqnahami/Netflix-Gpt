@@ -11,7 +11,7 @@ import {
 import { auth } from "../utils/Firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { USER_AVATAR } from "../utils/Constants";
+import { BG_URL, USER_AVATAR } from "../utils/Constants";
 
 const Login = () => {
   const name = useRef(null)
@@ -89,7 +89,7 @@ const Login = () => {
 
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/8cc08720-ac1c-4364-bcbd-9495bf0308cd/web/IN-en-20260323-TRIFECTA-perspective_0b8c8e4e-71ee-48bd-8e16-da74f083a838_large.jpg"
+          src={BG_URL}
           alt="logo"
         />
       </div>

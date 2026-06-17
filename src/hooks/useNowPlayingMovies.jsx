@@ -3,27 +3,35 @@ import { API_OPTIONS } from "../utils/Constants";
 import { addNowPlayingMovies } from "../utils/moviesSlice";
 import { useEffect } from "react";
 
-
-
 const useNowPlayingMovies = () => {
-
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const getNowPlayingMovies = async () => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/movie/now_playing?page=1",
-      API_OPTIONS,
-    );
+    try {
+      const data = await fetch(
+        "https://api.themoviedb.org/3/movie/now_playing?page=1",
+        API_OPTIONS
+      );
 
-    const json = await data.json();
-    dispatch(addNowPlayingMovies(json.results))
+      if (!data.ok) {
+        throw new Error(`HTTP Error: ${data.status}`);
+      }
 
+      const json = await data.json();
+
+      if (json.results) {
+        dispatch(addNowPlayingMovies(json.results));
+      }
+    } catch (error) {
+      console.error("Now Playing Movies Error:", error);
+    }
   };
 
   useEffect(() => {
     getNowPlayingMovies();
   }, []);
-}
+
+  return null;
+};
 
 export default useNowPlayingMovies;

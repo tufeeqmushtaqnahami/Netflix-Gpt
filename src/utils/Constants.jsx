@@ -7,16 +7,17 @@ export const USER_AVATAR =
 export const BG_URL =
   "https://assets.nflxext.com/ffe/siteui/vlv3/8cc08720-ac1c-4364-bcbd-9495bf0308cd/web/IN-en-20260323-TRIFECTA-perspective_0b8c8e4e-71ee-48bd-8e16-da74f083a838_large.jpg";
 
+
 export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ODcyNTJiYTg3Y2UzYmZlY2M2YTNiNWY4NmNkZWM2NSIsIm5iZiI6MTc3NjA5OTAxOS43MTUwMDAyLCJzdWIiOiI2OWRkMWVjYjE3MjNlMTc1NzgzNThiZDgiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.KTk8JnlvLMEAecpKlp98jMAUA6Q7OvUnpD7pUEOpAYg",
+     process.env.REACT_APP_TMDB_KEY,
   },
 };
 
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
 
-const OPEN_KEY =
-  "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";
+export const OPEN_KEY =
+    process.env.REACT_APP_OPEN_KEY;

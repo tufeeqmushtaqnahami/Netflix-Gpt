@@ -19,10 +19,10 @@ const Browse = () => {
       {showGptSearch ? (
         <GptSearch />
       ) : (
-        <>
+        <div className="overflow-x-hidden">
           <MainContainer />
           <SecondaryContainer />
-        </>
+        </div>
       )}
     </div>
   );

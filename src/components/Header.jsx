@@ -1,80 +1,88 @@
 import React, { useEffect } from "react";
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/Firebase";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { onAuthStateChanged } from "firebase/auth";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { LOGO } from "../utils/Constants";
 import { toggleGptSearchView } from "../utils/GptSlice";
+import { USER_AVATAR } from "../utils/Constants";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const user = useSelector((store) => store.user);
-  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);  
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {})
-      .catch((error) => {
-        navigate("/error");
-      });
+      .catch(() => navigate("/error"));
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName, photoURL } = user;
+
         dispatch(
           addUser({
-            uid: uid,
-            email: email,
-            displayName: displayName,
-            photoURL: photoURL,
-          }),
+            uid,
+            email,
+            displayName,
+            photoURL,
+          })
         );
+
         navigate("/browse");
       } else {
         dispatch(removeUser());
         navigate("/");
       }
     });
-    return ()=>unsubscribe()
+
+    return () => unsubscribe();
   }, []);
 
-
-
-
-  const handleGptSearchClick =()=>{
-   dispatch(toggleGptSearchView())
-  }
-
+  const handleGptSearchClick = () => {
+    dispatch(toggleGptSearchView());
+  };
 
   return (
-    <div className="absolute px-8 py-2 w-screen bg-gradient-to-b from-black z-10 flex justify-between">
-      <img
-        className="w-44"
-        src={LOGO}
-        alt="Netflix-logo"
-      />
+    <div className="absolute top-0 left-0 w-full z-20">
+      <div className="flex flex-col items-center py-4 bg-gradient-to-b from-black via-black/90 to-transparent">
+        
+        <img
+          src={LOGO}
+          alt="Netflix-logo"
+          className="w-36 md:w-48 mb-4"
+        />
 
-      {user && (
-        <div className="flex p-2">
-          <button className="py-2 px-4 mx-4 mt-2 bg-purple-700 rounded-lg text-white" 
-          onClick={handleGptSearchClick}>
-            {showGptSearch ? "Home Page" : "GPT Search"}
+        {user && (
+          <div className="flex items-center gap-4">
+            <button
+              onClick={handleGptSearchClick}
+              className="bg-purple-700 hover:bg-purple-800 text-white px-4 py-2 rounded-lg font-semibold text-sm"
+            >
+              {showGptSearch ? "Home Page" : "GPT Search"}
             </button>
-          <img src={user?.photoURL} alt="Icon" className="w-12 h-12 " />
-          <button
-            onClick={handleSignOut}
-            className="font-bold text-white"
-          >
-            SignOut
-          </button>
-        </div>
-      )}
+
+            <img
+              src={USER_AVATAR}
+              alt="Profile"
+              className="w-10 h-10 rounded border border-black object-cover"
+            />
+
+            <button
+              onClick={handleSignOut}
+              className="text-white font-semibold hover:text-red-500"
+            >
+              Sign Out
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

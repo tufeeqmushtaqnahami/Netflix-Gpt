@@ -8,6 +8,7 @@ import GptSearch from "./GptSearch";
 import { useSelector } from "react-redux";
 import useTrendingMovies from "../hooks/useTrendingMovies";
 import useUpcomingMovies from "../hooks/useUpcomingMovies";
+import Footer from "./Footer";
 
 const Browse = () => {
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
@@ -26,6 +27,7 @@ const Browse = () => {
         <div className="overflow-x-hidden">
           <MainContainer />
           <SecondaryContainer />
+           <Footer />
         </div>
       )}
     </div>

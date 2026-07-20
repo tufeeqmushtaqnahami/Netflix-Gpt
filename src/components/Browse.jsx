@@ -1,17 +1,22 @@
 import Header from "./Header";
-import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
-import usePopularMovies from "../hooks/UsePopularMovies";
-import useTopRatedMovies from "../hooks/useTopRatedMovies";
 import GptSearch from "./GptSearch";
-import { useSelector } from "react-redux";
-import useTrendingMovies from "../hooks/useTrendingMovies";
-import useUpcomingMovies from "../hooks/useUpcomingMovies";
 import Footer from "./Footer";
 
+import { useSelector } from "react-redux";
+
+import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
+import usePopularMovies from "../hooks/UsePopularMovies";
+import useTopRatedMovies from "../hooks/useTopRatedMovies";
+import useTrendingMovies from "../hooks/useTrendingMovies";
+import useUpcomingMovies from "../hooks/useUpcomingMovies";
+
 const Browse = () => {
-  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
+  const showGptSearch = useSelector(
+    (store) => store.gpt.showGptSearch
+  );
+
   useNowPlayingMovies();
   usePopularMovies();
   useTopRatedMovies();
@@ -19,19 +24,23 @@ const Browse = () => {
   useUpcomingMovies();
 
   return (
-    <div>
+    <div className="min-h-screen bg-black overflow-x-hidden">
       <Header />
-      {showGptSearch ? (
-        <GptSearch />
-      ) : (
-        <div className="overflow-x-hidden">
-          <MainContainer />
-          <SecondaryContainer />
-           <Footer />
-        </div>
-      )}
+
+      <main className="w-full">
+        {showGptSearch ? (
+          <GptSearch />
+        ) : (
+          <>
+            <MainContainer />
+            <SecondaryContainer />
+            <Footer />
+          </>
+        )}
+      </main>
     </div>
   );
 };
 
 export default Browse;
+

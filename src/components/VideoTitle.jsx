@@ -1,22 +1,116 @@
-import React from 'react'
+import React from "react";
+import { Play, Info } from "lucide-react";
 
-const VideoTitle = ({title , overview}) => {
+const VideoTitle = ({ title, overview }) => {
   return (
-    <div className='w-screen aspect-video pt-[35%] sm:pt-[30%] md:pt-[22%] lg:pt-[18%] px-4 sm:px-8 md:px-12 lg:px-20 absolute text-white bg-gradient-to-r from-black'>
-      <h1 className='text-xl sm:text-2xl md:text-4xl lg:text-6xl font-bold'>{title}</h1>
-      <p className='hidden md:block py-3 lg:py-6 text-sm lg:text-lg w-full md:w-2/3 lg:w-1/3'>{overview}</p>
+    <div
+      className="
+        absolute
+        inset-0
+        z-20
+        flex
+        items-start
+        bg-gradient-to-r
+        from-black
+        via-black/70
+        to-transparent
+      "
+    >
+      <div
+        className="
+          w-full
+          pt-24
+          sm:pt-28
+          md:pt-36
+          lg:pt-40
+          pl-5
+          sm:pl-8
+          md:pl-12
+          lg:pl-16
+          xl:pl-20
+        "
+      >
+        <div className="max-w-xl lg:max-w-2xl">
+          {/* Title */}
+          <h1
+            className="
+              text-4xl
+              sm:text-5xl
+              md:text-6xl
+              lg:text-7xl
+              font-extrabold
+              leading-tight
+              text-white
+              drop-shadow-2xl
+            "
+          >
+            {title}
+          </h1>
 
+          {/* Description */}
+          <p
+            className="
+              hidden
+              md:block
+              mt-6
+              text-gray-200
+              text-base
+              lg:text-lg
+              leading-relaxed
+              max-w-xl
+              drop-shadow-lg
+            "
+          >
+            {overview}
+          </p>
 
+          {/* Buttons */}
+          <div className="flex items-center gap-4 mt-8">
+            <button
+              className="
+                flex
+                items-center
+                gap-2
+                bg-white
+                text-black
+                font-semibold
+                px-6
+                py-3
+                rounded-md
+                hover:bg-gray-200
+                transition-all
+                duration-300
+              "
+            >
+              <Play size={20} fill="black" />
+              Play
+            </button>
 
-      <div className='flex flex-wrap gap-2 md:gap-4'>
-        <button className='bg-white px-4 md:px-8 lg:px-12 text-sm md:text-lg lg:text-xl text-black py-2 md:py-4 rounded-lg hover:opacity-80'>▶️Play</button>
-        <button className='bg-gray-800 px-4 md:px-8 lg:px-12 text-sm md:text-lg lg:text-xl text-white py-2 md:py-4 bg-opacity-50 rounded-lg'>More Info</button>
+            <button
+              className="
+                flex
+                items-center
+                gap-2
+                bg-gray-700/80
+                backdrop-blur-md
+                text-white
+                font-semibold
+                px-6
+                py-3
+                rounded-md
+                hover:bg-gray-600
+                transition-all
+                duration-300
+              "
+            >
+              <Info size={20} />
+              More Info
+            </button>
+          </div>
+        </div>
       </div>
-
-
-
     </div>
-  )
-}
+  );
+};
 
-export default VideoTitle
+export default VideoTitle;

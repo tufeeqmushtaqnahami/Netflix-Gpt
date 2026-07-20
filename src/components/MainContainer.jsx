@@ -1,26 +1,41 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import VideoTitle from './VideoTitle'
-import VideoBackgorund from './VideoBackgorund'
+import React from "react";
+import { useSelector } from "react-redux";
+import VideoTitle from "./VideoTitle";
+import VideoBackgorund from "./VideoBackgorund";
 
 const MainContainer = () => {
+  const movies = useSelector(
+    (store) => store.movies?.nowPlayingMovies
+  );
 
-  const movies = useSelector((store) => store.movies?.nowPlayingMovies)
+  if (!movies || movies.length === 0) return null;
 
-  if(!movies) return; 
- 
-  const mainMovie = movies[0]
-
-
-  const {original_title, overview , id }= mainMovie 
-  
+  const { original_title, overview, id } = movies[0];
 
   return (
-    <div className="relative">
-      <VideoTitle title={original_title} overview={overview}/>
-      <VideoBackgorund movieId={id}/>
-    </div>
-  )
-}
+    <section
+      className="
+        relative
+        w-full
+        h-[55vh]
+        sm:h-[60vh]
+        md:h-[70vh]
+        lg:h-[85vh]
+        xl:h-screen
+        overflow-hidden
+        bg-black
+      "
+    >
+      <VideoBackgorund movieId={id} />
 
-export default MainContainer
+      <div className="absolute inset-0 z-20">
+        <VideoTitle
+          title={original_title}
+          overview={overview}
+        />
+      </div>
+    </section>
+  );
+};
+
+export default MainContainer;

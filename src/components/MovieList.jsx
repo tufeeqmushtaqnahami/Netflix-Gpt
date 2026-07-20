@@ -1,21 +1,55 @@
 import React from "react";
+import { ChevronRight } from "lucide-react";
 import MovieCard from "./MovieCard";
 
 const MovieList = ({ title, movies }) => {
-  return (
-    <div className="px-2 sm:px-4 md:px-6 mb-12">
-      <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl py-2 md:py-4 text-white font-semibold">
-        {title}
-      </h1>
+  if (!movies || movies.length === 0) return null;
 
-      <div className="flex overflow-x-scroll no-scrollbar">
-        <div className="flex gap-2 md:gap-4">
-          {movies?.map((movie) => (
-            <MovieCard key={movie.id} posterPath={movie.poster_path} />
+  return (
+    <section className="group">
+      {/* Section Header */}
+      <div className="flex items-center justify-between mb-5 px-1">
+        <div className="flex items-center gap-3">
+          <div className="w-1.5 h-8 rounded-full bg-gradient-to-b from-red-500 to-pink-500"></div>
+
+          <h2 className="text-2xl md:text-3xl font-bold text-white">
+            {title}
+          </h2>
+        </div>
+
+        <button className="hidden md:flex items-center gap-2 text-gray-400 hover:text-white transition">
+          View All
+          <ChevronRight size={18} />
+        </button>
+      </div>
+
+      {/* Movie Slider */}
+      <div className="relative">
+        {/* Left Fade */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+
+        {/* Right Fade */}
+        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
+
+        <div
+          className="
+            flex
+            gap-5
+            overflow-x-auto
+            pb-4
+            scroll-smooth
+            no-scrollbar
+          "
+        >
+          {movies.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              posterPath={movie.poster_path}
+            />
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

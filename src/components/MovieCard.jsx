@@ -1,13 +1,24 @@
 import React from "react";
 import { Play } from "lucide-react";
+import { useDispatch } from "react-redux";
 import { IMG_CDN_URL } from "../utils/Constants";
+import { openModal } from "../utils/modalSlice";
 import noPoster from "../assets/noPoster.png";
 
-const MovieCard = ({ posterPath }) => {
-  if (!posterPath) return null;
+const MovieCard = ({ movie }) => {
+  const dispatch = useDispatch();
+
+  if (!movie) return null;
+
+  const { id, poster_path } = movie;
+
+  const handleMovieClick = () => {
+    dispatch(openModal(id));
+  };
 
   return (
     <div
+      onClick={handleMovieClick}
       className="
         relative
         flex-shrink-0
@@ -27,7 +38,7 @@ const MovieCard = ({ posterPath }) => {
     >
       {/* Poster */}
       <img
-        src={posterPath ? IMG_CDN_URL + posterPath : noPoster}
+        src={poster_path ? IMG_CDN_URL + poster_path : noPoster}
         alt="Movie Poster"
         className="
           w-full

@@ -1,3 +1,4 @@
+
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -27,6 +28,7 @@ const Login = () => {
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
+    setErrorMessage(null);
   };
 
   const handleButtonClick = () => {
@@ -53,8 +55,7 @@ const Login = () => {
             photoURL: USER_AVATAR,
           })
             .then(() => {
-              const { uid, email, displayName, photoURL } =
-                auth.currentUser;
+              const { uid, email, displayName, photoURL } = auth.currentUser;
 
               dispatch(
                 addUser({
@@ -66,11 +67,28 @@ const Login = () => {
               );
             })
             .catch((error) => {
-              setErrorMessage(error.message);
+              setErrorMessage("Unable to update your profile. Please try again.");
             });
         })
         .catch((error) => {
-          setErrorMessage(error.code + " - " + error.message);
+          switch (error.code) {
+            case "auth/email-already-in-use":
+              setErrorMessage("An account with this email already exists.");
+              break;
+
+            case "auth/invalid-email":
+              setErrorMessage("Please enter a valid email address.");
+              break;
+
+            case "auth/weak-password":
+              setErrorMessage(
+                "Password should be at least 6 characters long."
+              );
+              break;
+
+            default:
+              setErrorMessage("Unable to create your account. Please try again.");
+          }
         });
     } else {
       signInWithEmailAndPassword(
@@ -80,7 +98,32 @@ const Login = () => {
       )
         .then(() => {})
         .catch((error) => {
-          setErrorMessage(error.code + " - " + error.message);
+          switch (error.code) {
+            case "auth/invalid-credential":
+              setErrorMessage("Incorrect email or password.");
+              break;
+
+            case "auth/user-not-found":
+              setErrorMessage("No account found with this email.");
+              break;
+
+            case "auth/wrong-password":
+              setErrorMessage("Incorrect password.");
+              break;
+
+            case "auth/invalid-email":
+              setErrorMessage("Please enter a valid email address.");
+              break;
+
+            case "auth/too-many-requests":
+              setErrorMessage(
+                "Too many failed attempts. Please try again later."
+              );
+              break;
+
+            default:
+              setErrorMessage("Something went wrong. Please try again.");
+          }
         });
     }
   };
@@ -160,3 +203,4 @@ const Login = () => {
 };
 
 export default Login;
+

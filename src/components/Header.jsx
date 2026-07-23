@@ -39,7 +39,7 @@ const Header = () => {
 
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {})
+      .then(() => { })
       .catch(() => navigate("/error"));
   };
 
@@ -73,11 +73,10 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 z-50 w-full transition-all duration-500 ${
-        showBackground
-          ? "bg-[#141414]/95 backdrop-blur-md shadow-xl"
-          : "bg-gradient-to-b from-black via-black/70 to-transparent"
-      }`}
+      className={`fixed top-0 left-0 z-50 w-full transition-all duration-500 ${showBackground
+        ? "bg-[#141414]/95 backdrop-blur-md shadow-xl"
+        : "bg-gradient-to-b from-black via-black/70 to-transparent"
+        }`}
     >
       <div className="max-w-[1600px] mx-auto px-10">
         <div className="flex items-center justify-between h-20">
@@ -92,19 +91,77 @@ const Header = () => {
 
             {user && (
               <nav className="hidden lg:flex items-center gap-8">
-                <button className="flex items-center gap-2 text-white hover:text-red-500 transition duration-300">
+                <button
+                  onClick={() => {
+                    if (showGptSearch) {
+                      dispatch(toggleGptSearchView());
+                    } else {
+                      window.scrollTo({
+                        top: 0,
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
+                  className="flex items-center gap-2 text-white hover:text-red-500 transition duration-300"
+                >
                   <Home size={18} />
                   Home
                 </button>
 
-                <button className="flex items-center gap-2 text-gray-300 hover:text-red-500 transition duration-300">
+                <button
+                  onClick={() => {
+                    if (showGptSearch) {
+                      dispatch(toggleGptSearchView());
+
+                      setTimeout(() => {
+                        document
+                          .getElementById("movies-section")
+                          ?.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                          });
+                      }, 100);
+                    } else {
+                      document
+                        .getElementById("movies-section")
+                        ?.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start",
+                        });
+                    }
+                  }}
+                  className="flex items-center gap-2 text-gray-300 hover:text-red-500 transition duration-300"
+                >
                   <Film size={18} />
                   Movies
                 </button>
 
-                <button className="flex items-center gap-2 text-gray-300 hover:text-red-500 transition duration-300">
-                  <Tv size={18} />
-                  TV Shows
+                <button
+                  onClick={() => {
+                    if (showGptSearch) {
+                      dispatch(toggleGptSearchView());
+
+                      setTimeout(() => {
+                        document
+                          .getElementById("genres-section")
+                          ?.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                          });
+                      }, 100);
+                    } else {
+                      document
+                        .getElementById("genres-section")
+                        ?.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start",
+                        });
+                    }
+                  }}
+                  className="flex items-center gap-2 text-gray-300 hover:text-red-500 transition duration-300"
+                >
+                  <Film size={18} />
+                  Genres
                 </button>
 
                 <button className="flex items-center gap-2 text-gray-300 hover:text-red-500 transition duration-300">

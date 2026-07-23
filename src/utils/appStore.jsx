@@ -4,6 +4,7 @@ import userReducer from "./userSlice";
 import moviesReducer from "./moviesSlice";
 import gptReducer from "./GptSlice"
 import modalReducer from "./modalSlice";
+import searchReducer from "./searchSlice";
 
 const appStore = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const appStore = configureStore({
     movies : moviesReducer,
     gpt: gptReducer,
     modal: modalReducer,
+    search: searchReducer,
   },
 });
 

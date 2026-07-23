@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { LOGO } from "../utils/Constants";
 import { toggleGptSearchView } from "../utils/GptSlice";
-
+import { openSearch } from "../utils/searchSlice";
 import {
   Bot,
   LogOut,
@@ -54,7 +54,7 @@ const Header = () => {
             email,
             displayName,
             photoURL,
-          })
+          }),
         );
 
         navigate("/browse");
@@ -129,35 +129,22 @@ const Header = () => {
 
               {/* Search */}
               <button
+                onClick={() => dispatch(openSearch())}
                 className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 transition duration-300"
               >
-                <Search
-                  size={20}
-                  className="text-white"
-                />
+                <Search size={20} className="text-white" />
               </button>
 
               {/* AI Profile */}
-              <div
-                className="hidden md:flex items-center gap-3 px-3 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition duration-300 cursor-pointer"
-              >
-                <div
-                  className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 via-sky-500 to-indigo-600 flex items-center justify-center"
-                >
-                  <Bot
-                    size={18}
-                    className="text-white"
-                  />
+              <div className="hidden md:flex items-center gap-3 px-3 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition duration-300 cursor-pointer">
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 via-sky-500 to-indigo-600 flex items-center justify-center">
+                  <Bot size={18} className="text-white" />
                 </div>
 
                 <div className="hidden xl:block">
-                  <p className="text-white text-sm font-medium">
-                    AI
-                  </p>
+                  <p className="text-white text-sm font-medium">AI</p>
 
-                  <p className="text-green-400 text-xs">
-                    Online
-                  </p>
+                  <p className="text-green-400 text-xs">Online</p>
                 </div>
               </div>
 
@@ -167,9 +154,7 @@ const Header = () => {
                 className="flex items-center gap-2 px-5 py-2 rounded-full border border-white/20 text-white hover:bg-red-600 hover:border-red-600 transition duration-300"
               >
                 <LogOut size={18} />
-                <span className="hidden md:block">
-                  Logout
-                </span>
+                <span className="hidden md:block">Logout</span>
               </button>
             </div>
           )}

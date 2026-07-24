@@ -164,7 +164,30 @@ const Header = () => {
                   Genres
                 </button>
 
-                <button className="flex items-center gap-2 text-gray-300 hover:text-red-500 transition duration-300">
+                <button
+                  onClick={() => {
+                    if (showGptSearch) {
+                      dispatch(toggleGptSearchView());
+
+                      setTimeout(() => {
+                        document
+                          .getElementById("my-list-section")
+                          ?.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                          });
+                      }, 100);
+                    } else {
+                      document
+                        .getElementById("my-list-section")
+                        ?.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start",
+                        });
+                    }
+                  }}
+                  className="flex items-center gap-2 text-gray-300 hover:text-red-500 transition duration-300"
+                >
                   <Heart size={18} />
                   My List
                 </button>

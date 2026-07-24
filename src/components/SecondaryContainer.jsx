@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import MovieList from "./MovieList";
 import Genres from "./Genres";
+import MyListSection from "./MyListSection";
+
 
 const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies);
@@ -37,6 +39,7 @@ const SecondaryContainer = () => {
         movies={movies.topRatedMovies}
       />
       <Genres />
+      <MyListSection />
     </div>
   </section>
 );

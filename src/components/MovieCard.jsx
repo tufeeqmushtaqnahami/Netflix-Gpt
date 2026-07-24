@@ -1,19 +1,34 @@
 import React from "react";
-import { Play } from "lucide-react";
-import { useDispatch } from "react-redux";
+import { Play, Bookmark, BookmarkCheck } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
 import { IMG_CDN_URL } from "../utils/Constants";
 import { openModal } from "../utils/modalSlice";
+import { addToMyList, removeFromMyList } from "../utils/myListSlice";
 import noPoster from "../assets/noPoster.png";
 
 const MovieCard = ({ movie }) => {
   const dispatch = useDispatch();
 
+  const myList = useSelector((store) => store.myList.movies);
+
   if (!movie) return null;
 
   const { id, poster_path } = movie;
 
+  const isSaved = myList.some((item) => item.id === movie.id);
+
   const handleMovieClick = () => {
     dispatch(openModal(id));
+  };
+
+  const handleMyList = (e) => {
+    e.stopPropagation();
+
+    if (isSaved) {
+      dispatch(removeFromMyList(movie.id));
+    } else {
+      dispatch(addToMyList(movie));
+    }
   };
 
   return (
@@ -36,6 +51,34 @@ const MovieCard = ({ movie }) => {
         hover:scale-105
       "
     >
+      {/* My List Button */}
+      <button
+        onClick={handleMyList}
+        className="
+          absolute
+          top-3
+          right-3
+          z-30
+          p-2
+          rounded-full
+          bg-black/70
+          backdrop-blur-sm
+          text-white
+          opacity-0
+          group-hover:opacity-100
+          transition-all
+          duration-300
+          hover:bg-red-600
+          hover:scale-110
+        "
+      >
+        {isSaved ? (
+          <BookmarkCheck size={18} />
+        ) : (
+          <Bookmark size={18} />
+        )}
+      </button>
+
       {/* Poster */}
       <img
         src={poster_path ? IMG_CDN_URL + poster_path : noPoster}

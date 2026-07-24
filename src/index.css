@@ -27,3 +27,43 @@ html {
   scrollbar-width: thin;
   scrollbar-color: #4b5563 #0f0f0f;
 }
+
+
+
+@keyframes attention {
+  /* Stay still for first 3 seconds (0% - 37.5%) */
+  0%,
+  37.5% {
+    transform: translateX(0);
+  }
+
+  /* Move for 2 seconds (37.5% - 62.5%) */
+  42% {
+    transform: translateX(-4px);
+  }
+
+  46% {
+    transform: translateX(4px);
+  }
+
+  50% {
+    transform: translateX(-3px);
+  }
+
+  54% {
+    transform: translateX(3px);
+  }
+
+  58% {
+    transform: translateX(-2px);
+  }
+
+  62.5% {
+    transform: translateX(0);
+  }
+
+  /* Stay still for last 3 seconds (62.5% - 100%) */
+  100% {
+    transform: translateX(0);
+  }
+}

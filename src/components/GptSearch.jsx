@@ -10,7 +10,7 @@ const GptSearch = () => {
       <div className="fixed inset-0 -z-20">
         <img
           src={BG_URL}
-          alt="Netflix Background"
+          alt="GemiFlix Background"
           className="w-full h-full object-cover"
         />
       </div>

@@ -5,7 +5,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-6 py-3 flex flex-col sm:flex-row items-center justify-between">
           
           <div className="text-gray-300 text-sm font-medium">
-            Netflix GPT
+            GemiFlix
           </div>
 
           <div className="text-gray-400 text-xs sm:text-sm">

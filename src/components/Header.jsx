@@ -108,12 +108,13 @@ const Header = () => {
           {/* Left Side */}
           <div className="flex items-center gap-12">
 
-            <img
-              src={LOGO}
-              alt="Logo"
-              className="w-36 object-contain cursor-pointer"
-              onClick={() => navigate("/browse")}
-            />
+            <h1
+  onClick={() => navigate("/browse")}
+  className="text-3xl font-extrabold cursor-pointer tracking-tight select-none"
+>
+  <span className="text-white">Gemi</span>
+  <span className="text-red-500">Flix</span>
+</h1>
 
             {user && (
               <nav className="hidden lg:flex items-center gap-8">
